@@ -25,7 +25,7 @@
     position: relative;
   }
 
-  /* Partículas / destellos de fondo */
+  /* Partículas de fondo */
   .stars {
     position: absolute;
     width: 100%;
@@ -82,7 +82,7 @@
     transition: all 0.5s ease;
   }
 
-  /* Encuadernación / Anillas del libro */
+  /* Anillas del libro */
   .book-container::before {
     content: '';
     position: absolute;
@@ -164,7 +164,7 @@
 
   /* Tarjeta Estilo Spotify */
   .spotify-card {
-    background: #7a93a0;
+    background: #8fa3b0;
     border-radius: 18px;
     padding: 25px 20px;
     width: 100%;
@@ -183,11 +183,12 @@
   }
 
   .album-art {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 6px;
     object-fit: cover;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    background-color: #222;
   }
 
   .song-info {
@@ -204,14 +205,14 @@
   .song-artist {
     font-size: 0.85em;
     color: #222;
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   /* Letra de la canción */
   .lyrics {
-    font-size: 1.45em;
+    font-size: 1.35em;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.4;
     color: #0d1b2a;
     margin-bottom: 25px;
     font-family: 'Poppins', sans-serif;
@@ -233,7 +234,7 @@
     fill: currentColor;
   }
 
-  /* Navegación entre páginas */
+  /* Navegación */
   .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -272,41 +273,37 @@
 </head>
 <body>
 
-  <!-- Partículas de fondo -->
   <div class="stars" id="stars"></div>
 
-  <!-- Indicador -->
   <div class="top-hint" id="topHint">✨ Presiona el libro para abrir ✨</div>
 
-  <!-- Contenedor del Libro -->
   <div class="book-container">
     
     <!-- PORTADA -->
     <div class="cover" id="coverView">
       <h1>Para mi Chaparrita 💖</h1>
-      <p>He creado esta pequeña historia con nuestras canciones favoritas para recordarte cuánto te amo...</p>
+      <p>He preparado este pequeño detalle con canciones que me recuerdan a lo bonito que es conocerte...</p>
       
-      <img class="cover-img" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Foto Juntos">
+      <img class="cover-img" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Foto Portada">
       
       <button class="btn-open" onclick="openBook()">Abrir Libro 📖</button>
     </div>
 
-    <!-- PÁGINAS DEL LIBRO (INTERIOR) -->
+    <!-- PÁGINAS INTERIORES -->
     <div class="pages-view" id="pagesView">
-      <h2 class="page-title" id="pageTitle">Lo que siento por ti 🥰</h2>
+      <h2 class="page-title" id="pageTitle">Momento 1 ✨</h2>
 
-      <!-- Tarjeta Spotify -->
       <div class="spotify-card" id="spotifyCard">
         <div class="song-header">
-          <img class="album-art" id="albumArt" src="" alt="Portada Álbum">
+          <img class="album-art" id="albumArt" src="" alt="Portada" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg'">
           <div class="song-info">
-            <span class="song-title" id="songTitle">Nombre Canción</span>
+            <span class="song-title" id="songTitle">Título</span>
             <span class="song-artist" id="songArtist">Artista</span>
           </div>
         </div>
 
         <div class="lyrics" id="songLyrics">
-          "Aquí irá la letra de la canción..."
+          "Letra de la canción..."
         </div>
 
         <div class="spotify-logo">
@@ -315,46 +312,103 @@
         </div>
       </div>
 
-      <!-- Controles de Navegación -->
       <div class="nav-buttons">
         <button class="btn-nav" id="btnPrev" onclick="changePage(-1)">← Anterior</button>
         <button class="btn-nav" id="btnNext" onclick="changePage(1)">Siguiente →</button>
       </div>
-      <div class="page-number" id="pageNumber">Página 1 de 3</div>
+      <div class="page-number" id="pageNumber">Página 1 de 10</div>
     </div>
 
   </div>
 
   <script>
+    // 10 Canciones bonitas, tranquilas y no excesivamente intensas
     const pagesData = [
       {
-        title: "Nuestra Conexión ✨",
+        title: "Un alivio bonito 🌿",
         songTitle: "Si Supieras",
         artist: "Kevin Kaarl",
-        lyrics: "Despertar es un alivio<br>Por ver que tú estás conmigo<br>Y que nos queremos los dos",
-        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
+        lyrics: "Despertar es un alivio<br>por ver que tú estás conmigo<br>y que nos queremos los dos.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
         bgColor: "#8fa3b0"
       },
       {
-        title: "Siempre para Ti 💗",
+        title: "Estar para ti 💗",
         songTitle: "Es Que Yo Te Quiero A Ti",
         artist: "Kevin Kaarl",
-        lyrics: "Yo te cuidaré cuando estés triste o bien contenta, corazón.<br>Es que yo te quiero a ti",
-        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
+        lyrics: "Yo te cuidaré cuando estés triste o bien contenta, corazón.<br>Es que yo te quiero a ti.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
         bgColor: "#9ea4be"
       },
       {
-        title: "Mi Lugar Seguro 🌹",
+        title: "Un rato juntos ✨",
         songTitle: "San Lucas",
         artist: "Kevin Kaarl",
         lyrics: "Dime tú si te quieres quedar,<br>mira que la noche apenas va a empezar...",
-        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
-        bgColor: "#b09ea4"
+        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
+        bgColor: "#7e9081"
+      },
+      {
+        title: "Paso a paso 🚶‍♂️",
+        songTitle: "Caminando lento",
+        artist: "Daniel, Me Estás Matando",
+        lyrics: "No tenemos prisa, el tiempo se detiene cuando me hablas.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e02bd92e21e0655d475ef7a0279",
+        bgColor: "#a38fa0"
+      },
+      {
+        title: "Verte sonreír 🌷",
+        songTitle: "Tú Sí Sabes Quererme",
+        artist: "Natalia Lafourcade",
+        lyrics: "Corazón, tú sí sabes quererme como a mí me gusta.<br>Tú sí sabes cuidarme.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e02e0ee37c62ee3eb487a531d0d",
+        bgColor: "#b5a38f"
+      },
+      {
+        title: "Un día especial ☀️",
+        songTitle: "Brillas",
+        artist: "León Larregui",
+        lyrics: "Nos dimos lo que el mundo nos negó...<br>Brillas y brillas tan lindo.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e029c7879e6cb394ec5018fb63e",
+        bgColor: "#9ea88f"
+      },
+      {
+        title: "Coincidir 💭",
+        songTitle: "Fuentes De Ortiz",
+        artist: "Ed Maverick",
+        lyrics: "Dime si tú sientes lo mismo que yo,<br>porque me haces sentir genial.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e021a81bc26c59b3fb081b8e4e9",
+        bgColor: "#8f9ea8"
+      },
+      {
+        title: "Calma y tranquilidad 🍃",
+        songTitle: "Ojos Noche",
+        artist: "El Elsa y Elmar",
+        lyrics: "Me gusta cuando me miras así,<br>como si el mundo fuera un lugar más suave.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e02ffbc4f1a21e4a6a5fa324907",
+        bgColor: "#948fa3"
+      },
+      {
+        title: "Hacer el día mejor ☕",
+        songTitle: "Favorito",
+        artist: "Camilo",
+        lyrics: "Tu sonrisa es mi lugar favorito en el mundo.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e02927f6e2f16ef06e1d5eb817e",
+        bgColor: "#a3998f"
+      },
+      {
+        title: "El comienzo de algo 💫",
+        songTitle: "Colapso",
+        artist: "Kevin Kaarl",
+        lyrics: "Hoy me siento bien porque sé que estás aquí,<br>gracias por acompañarme.",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
+        bgColor: "#8f99a8"
       }
     ];
 
     let currentPage = 0;
 
+    // Crear partículas
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 25; i++) {
       const star = document.createElement('div');
