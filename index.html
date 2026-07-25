@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 Un Regalo para Mi Amor 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle, #2b0b14 0%, #0d0205 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Partículas / destellos de fondo */
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    background: #ff7597;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff4f81, 0 0 20px #ff4f81;
+    animation: float 6s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-30px) scale(1.3); opacity: 0.9; }
+  }
+
+  /* Indicador superior */
+  .top-hint {
+    z-index: 10;
+    font-size: 1.1em;
+    color: #ff9ebb;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+    text-shadow: 0 0 10px rgba(255,79,129,0.5);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  /* Contenedor Principal del Libro */
+  .book-container {
+    position: relative;
+    z-index: 10;
+    width: 440px;
+    max-width: 90vw;
+    background: #fff0f3;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(255, 79, 129, 0.3);
+    border: 4px solid #ffccd5;
+    padding: 30px 25px;
+    color: #333;
+    text-align: center;
+    transition: all 0.5s ease;
+  }
+
+  /* Encuadernación / Anillas del libro */
+  .book-container::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 20px;
+    bottom: 20px;
+    width: 25px;
+    background: repeating-linear-gradient(
+      to bottom,
+      #d90429 0px,
+      #d90429 12px,
+      transparent 12px,
+      transparent 24px
+    );
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  }
+
+  /* PORTADA */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cover h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5em;
+    color: #c9184a;
+    margin-bottom: 10px;
+  }
+
+  .cover p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .cover-img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
+  }
+
+  .btn-open {
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
+    transition: transform 0.2s, background 0.3s;
+  }
+
+  .btn-open:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff758f, #a4133c);
+  }
+
+  /* INTERIOR DEL LIBRO (PÁGINAS) */
+  .pages-view {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+    color: #a4133c;
+    margin-bottom: 15px;
+  }
+
+  /* Tarjeta Estilo Spotify */
+  .spotify-card {
+    background: #7a93a0;
+    border-radius: 18px;
+    padding: 25px 20px;
+    width: 100%;
+    color: #0b090a;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: left;
+    margin-bottom: 20px;
+    transition: background 0.5s ease;
+  }
+
+  .song-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .album-art {
+    width: 45px;
+    height: 45px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .song-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .song-title {
+    font-size: 1em;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .song-artist {
+    font-size: 0.85em;
+    color: #222;
+    opacity: 0.8;
+  }
+
+  /* Letra de la canción */
+  .lyrics {
+    font-size: 1.45em;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #0d1b2a;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .spotify-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #000;
+    opacity: 0.85;
+  }
+
+  .spotify-logo svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+  }
+
+  /* Navegación entre páginas */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-nav {
+    background: #ffb3c1;
+    color: #590d22;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .btn-nav:hover {
+    background: #ff758f;
+    color: white;
+  }
+
+  .btn-nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .page-number {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Partículas de fondo -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Indicador -->
+  <div class="top-hint" id="topHint">✨ Presiona el libro para abrir ✨</div>
+
+  <!-- Contenedor del Libro -->
+  <div class="book-container">
+    
+    <!-- PORTADA -->
+    <div class="cover" id="coverView">
+      <h1>Para mi Chaparrita 💖</h1>
+      <p>He creado esta pequeña historia con nuestras canciones favoritas para recordarte cuánto te amo...</p>
+      
+      <img class="cover-img" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop" alt="Foto Juntos">
+      
+      <button class="btn-open" onclick="openBook()">Abrir Libro 📖</button>
+    </div>
+
+    <!-- PÁGINAS DEL LIBRO (INTERIOR) -->
+    <div class="pages-view" id="pagesView">
+      <h2 class="page-title" id="pageTitle">Lo que siento por ti 🥰</h2>
+
+      <!-- Tarjeta Spotify -->
+      <div class="spotify-card" id="spotifyCard">
+        <div class="song-header">
+          <img class="album-art" id="albumArt" src="" alt="Portada Álbum">
+          <div class="song-info">
+            <span class="song-title" id="songTitle">Nombre Canción</span>
+            <span class="song-artist" id="songArtist">Artista</span>
+          </div>
+        </div>
+
+        <div class="lyrics" id="songLyrics">
+          "Aquí irá la letra de la canción..."
+        </div>
+
+        <div class="spotify-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.841c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-.1.2-1.02-.36-.18-.6.36-1.02.96-1.2 4.2-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg>
+          Spotify
+        </div>
+      </div>
+
+      <!-- Controles de Navegación -->
+      <div class="nav-buttons">
+        <button class="btn-nav" id="btnPrev" onclick="changePage(-1)">← Anterior</button>
+        <button class="btn-nav" id="btnNext" onclick="changePage(1)">Siguiente →</button>
+      </div>
+      <div class="page-number" id="pageNumber">Página 1 de 3</div>
+    </div>
+
+  </div>
+
+  <script>
+    const pagesData = [
+      {
+        title: "Nuestra Conexión ✨",
+        songTitle: "Si Supieras",
+        artist: "Kevin Kaarl",
+        lyrics: "Despertar es un alivio<br>Por ver que tú estás conmigo<br>Y que nos queremos los dos",
+        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
+        bgColor: "#8fa3b0"
+      },
+      {
+        title: "Siempre para Ti 💗",
+        songTitle: "Es Que Yo Te Quiero A Ti",
+        artist: "Kevin Kaarl",
+        lyrics: "Yo te cuidaré cuando estés triste o bien contenta, corazón.<br>Es que yo te quiero a ti",
+        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
+        bgColor: "#9ea4be"
+      },
+      {
+        title: "Mi Lugar Seguro 🌹",
+        songTitle: "San Lucas",
+        artist: "Kevin Kaarl",
+        lyrics: "Dime tú si te quieres quedar,<br>mira que la noche apenas va a empezar...",
+        albumCover: "https://i.scdn.co/image/ab67616d0000b27376c99c855a82e9b0d39e1a96",
+        bgColor: "#b09ea4"
+      }
+    ];
+
+    let currentPage = 0;
+
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 25; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = Math.random() * 8 + 4 + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 5 + 's';
+      starsContainer.appendChild(star);
+    }
+
+    function openBook() {
+      document.getElementById('coverView').style.display = 'none';
+      document.getElementById('pagesView').style.display = 'flex';
+      document.getElementById('topHint').innerText = "💖 Disfruta de nuestras canciones 💖";
+      renderPage();
+    }
+
+    function renderPage() {
+      const data = pagesData[currentPage];
+      document.getElementById('pageTitle').innerText = data.title;
+      document.getElementById('songTitle').innerText = data.songTitle;
+      document.getElementById('songArtist').innerText = data.artist;
+      document.getElementById('songLyrics').innerHTML = data.lyrics;
+      document.getElementById('albumArt').src = data.albumCover;
+      document.getElementById('spotifyCard').style.backgroundColor = data.bgColor;
+
+      document.getElementById('pageNumber').innerText = `Página ${currentPage + 1} de ${pagesData.length}`;
+
+      document.getElementById('btnPrev').disabled = currentPage === 0;
+      document.getElementById('btnNext').disabled = currentPage === pagesData.length - 1;
+    }
+
+    function changePage(direction) {
+      currentPage += direction;
+      renderPage();
+    }
+  </script>
+</body>
+</html>
