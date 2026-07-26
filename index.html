@@ -264,10 +264,27 @@
     cursor: not-allowed;
   }
 
+  .btn-home {
+    background: transparent;
+    border: 1px solid #c9184a;
+    color: #c9184a;
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.2s;
+  }
+
+  .btn-home:hover {
+    background: #c9184a;
+    color: white;
+  }
+
   .page-number {
     font-size: 0.85em;
     color: #888;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 </style>
 </head>
@@ -316,21 +333,22 @@
         <button class="btn-nav" id="btnPrev" onclick="changePage(-1)">← Anterior</button>
         <button class="btn-nav" id="btnNext" onclick="changePage(1)">Siguiente →</button>
       </div>
+      
+      <button class="btn-home" onclick="goHome()">🏠 Inicio / Portada</button>
       <div class="page-number" id="pageNumber">Página 1 de 10</div>
     </div>
 
   </div>
 
   <script>
-    // 10 Canciones bonitas, tranquilas y no excesivamente intensas
     const pagesData = [
       {
-        title: "Un alivio bonito 🌿",
-        songTitle: "Si Supieras",
-        artist: "Kevin Kaarl",
-        lyrics: "Despertar es un alivio<br>por ver que tú estás conmigo<br>y que nos queremos los dos.",
-        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
-        bgColor: "#8fa3b0"
+        title: "Una linda coincidencia 🌸",
+        songTitle: "Amor Completo",
+        artist: "Mon Laferte",
+        lyrics: "Qué lindo es saber que existes,<br>me haces tanto bien...",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e028b18f0c976f62b78f99e31ff",
+        bgColor: "#b08f9a"
       },
       {
         title: "Estar para ti 💗",
@@ -357,12 +375,12 @@
         bgColor: "#a38fa0"
       },
       {
-        title: "Verte sonreír 🌷",
-        songTitle: "Tú Sí Sabes Quererme",
-        artist: "Natalia Lafourcade",
-        lyrics: "Corazón, tú sí sabes quererme como a mí me gusta.<br>Tú sí sabes cuidarme.",
-        albumCover: "https://i.scdn.co/image/ab67616d00001e02e0ee37c62ee3eb487a531d0d",
-        bgColor: "#b5a38f"
+        title: "Estar cerquita 🍃",
+        songTitle: "Rizo de Cemento",
+        artist: "Kevin Kaarl",
+        lyrics: "Es que me gusta estar así,<br>tan cerquita de ti...",
+        albumCover: "https://i.scdn.co/image/ab67616d00001e0276c99c855a82e9b0d39e1a96",
+        bgColor: "#94a38f"
       },
       {
         title: "Un día especial ☀️",
@@ -381,7 +399,7 @@
         bgColor: "#8f9ea8"
       },
       {
-        title: "Calma y tranquilidad 🍃",
+        title: "Calma y tranquilidad 🌷",
         songTitle: "Ojos Noche",
         artist: "El Elsa y Elmar",
         lyrics: "Me gusta cuando me miras así,<br>como si el mundo fuera un lugar más suave.",
@@ -424,8 +442,15 @@
     function openBook() {
       document.getElementById('coverView').style.display = 'none';
       document.getElementById('pagesView').style.display = 'flex';
-      document.getElementById('topHint').innerText = "💖 Disfruta de nuestras canciones 💖";
+      document.getElementById('topHint').innerText = "💖 Un pequeño detalle para ti 💖";
+      currentPage = 0;
       renderPage();
+    }
+
+    function goHome() {
+      document.getElementById('pagesView').style.display = 'none';
+      document.getElementById('coverView').style.display = 'flex';
+      document.getElementById('topHint').innerText = "✨ Presiona el libro para abrir ✨";
     }
 
     function renderPage() {
